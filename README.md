@@ -1,2 +1,2 @@
-# Resume-Website
+# Weather-Website
 https://einthiri-weather.herokuapp.com/
