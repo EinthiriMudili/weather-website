@@ -26,7 +26,19 @@ class App extends React.Component {
 
 		return (
 			<div className='container'>
-				<input type="text" placeholder="Enter the City" />
+				<input type="text" placeholder="Enter the City" onChange={(e) => {
+					var city = e.target.value;
+					getWOEID(city).then(response => {
+						var data = response.data;
+						if (data.length > 0) {
+							var WOEID = data[0]["woeid"]
+							getWeather(WOEID).then(response => {
+								var weather = response.data;
+								console.log(weather);
+							})
+						}
+					})
+				}} />
 
 			</div>
 
