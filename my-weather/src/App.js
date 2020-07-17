@@ -19,6 +19,12 @@ class App extends React.Component {
 	}
 
 	render() {
+<<<<<<< HEAD
+=======
+		var weather = this.state.weather;
+	
+
+>>>>>>> b83e956da8c7bbee8ed46841925895d2f6cb7ac1
 		return (
 			<div className='container'>
 				<input type="text" placeholder="Enter the City" onChange={(e) => {
@@ -30,13 +36,15 @@ class App extends React.Component {
 							getWeather(WOEID).then(response => {
 								var weather = response.data;
 								console.log(weather);
+								this.setState({weather:weather});
 							})
 						}
 					})
 				}} />
 
-                { }
-
+				{this.state.weather == null ? (<h4>Weather is loading </h4>) :<div>
+					
+				</div>}
 			</div>
 		);
 	}
