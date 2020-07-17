@@ -18,12 +18,7 @@ class App extends React.Component {
 		this.state = { weather: null };
 	}
 
-
-
 	render() {
-
-	
-
 		return (
 			<div className='container'>
 				<input type="text" placeholder="Enter the City" onChange={(e) => {
@@ -40,8 +35,9 @@ class App extends React.Component {
 					})
 				}} />
 
-			</div>
+                { }
 
+			</div>
 		);
 	}
 }
