@@ -41,7 +41,7 @@ class App extends React.Component {
 					})
 				}} />
 				{this.state.weather == null ? (<h4>Weather is loading </h4>) :<div>
-					
+					<p class="bg-primary">Weather.</p>
 					</div>}
 			</div>
 
