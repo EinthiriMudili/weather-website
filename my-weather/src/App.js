@@ -8,7 +8,7 @@ function getWOEID(city) {
 }
 
 function getWeather(WOEID){
-	return axios.get("api/location/" + WOEID);
+	return axios.get("api/location/" + WOEID + "/");
 }
 
 class App extends React.Component {
