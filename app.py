@@ -15,7 +15,7 @@ def index():
 @app.route("/api/location/search")
 def get_WOEID():
     query_value = request.args.get('query')
-    response = requests.get(f"https://www.metaweather.com/api/location/search/?query={query_value}")
+    response = requests.get(f"https://www.metaweather.com/api/location/search?query={query_value}")
     return response.text
 
 @app.route("/api/location/<woeid>")
