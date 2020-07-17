@@ -18,8 +18,8 @@ def get_WOEID():
 
 @app.route("/api/location/<woeid>")
 def get_weather(woeid):
-    return f"get_weather {woeid}"
-
+    response = requests.get(f"https://www.metaweather.com/api/location/{woeid}")
+    return response.json()
 
 # run the application
 if __name__ == "__main__":
