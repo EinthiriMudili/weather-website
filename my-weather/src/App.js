@@ -22,7 +22,7 @@ class App extends React.Component {
 		var weather = this.state.weather;
 
 		return (
-			<div className='container'>
+			<div classWeatuer='container'>
 				<input type="text" placeholder="Enter the City" onChange={(e) => {
 					var city = e.target.value;
 					getWOEID(city).then(response => {
