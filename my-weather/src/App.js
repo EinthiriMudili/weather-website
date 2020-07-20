@@ -22,7 +22,8 @@ class App extends React.Component {
 		var weather = this.state.weather;
 
 		return (
-			<div classWeatuer='container'>
+			<div className='container'>
+				<h3 className="bg-primary"> Weather Data</h3>
 				<input type="text" placeholder="Enter the City" onChange={(e) => {
 					var city = e.target.value;
 					getWOEID(city).then(response => {
@@ -37,9 +38,7 @@ class App extends React.Component {
 						}
 					})
 				}} />
-
 				{this.state.weather == null ? (<h4>Weather is loading </h4>) :<div>
-					<p classWeather="bg-primary">Weather.</p>
 					
 				</div>}
 			</div>
