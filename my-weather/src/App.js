@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import lodash from 'lodash';
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = "";
@@ -48,7 +49,7 @@ class App extends React.Component {
 		super(props);
 		this.state = { weather: null, loading: false };
 
-		this.onInputChange = debounce((e) => {
+		this.onInputChange = lodash.debounce((e) => {
 			var city = e.target.value;
 
 			if (city.length >= 4) {
