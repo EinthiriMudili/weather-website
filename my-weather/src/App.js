@@ -28,7 +28,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { weather: null };
+		this.state = { weather: null, loading: false };
 	}
 
 	render() {
@@ -38,22 +38,29 @@ class App extends React.Component {
 					var city = e.target.value;
 
 					if (city.length >= 4) {
+
+						this.setState({ loading: true });
+
 						getWOEID(city).then(response => {
 							var data = response.data;
 							if (data.length > 0) {
 								var WOEID = data[0]["woeid"]
 								getWeather(WOEID).then(response => {
 									var weather = response.data;
-									console.log(weather);
-									this.setState({ weather: weather });
+									this.setState({
+										weather: weather,
+										loading: false
+									});
 								})
 							}
 						})
 					}
 				}} />
 
-				{this.state.weather == null ? (<h4>Weather is loading </h4>) : <div>
-					<p className="bg-primary">Weather.</p>
+				{this.state.loading == null ? (<h4>Weather is loading </h4>) : <div>
+					<p className="bg-primary">
+						{JSON.stringify(this.state.weather)}
+					</p>
 				</div>}
 			</div>
 		);
