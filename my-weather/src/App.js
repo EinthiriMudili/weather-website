@@ -2,12 +2,26 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = "";
+
+const instance = axios.create({
+	baseURL: window.location.origin,
+	timeout: 1000,
+	headers: {
+		'Content-Type': 'application/json',
+		'Accept': 'application/json, text/plain, */*',
+		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+	}
+});
+
 function getWOEID(city) {
-	return axios.get("api/location/search?query=" + city);
+	return instance.get("/api/location/search?query=" + city);
 }
 
 function getWeather(WOEID) {
-	return axios.get("api/location/" + WOEID + "/");
+	return instance.get("/api/location/" + WOEID + "/");
 }
 
 class App extends React.Component {
