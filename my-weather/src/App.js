@@ -16,7 +16,7 @@ const instance = axios.create({
 });
 
 function debounce(func, wait) {
-	var timeout = null;
+	var timeout = 0;
 
 	return function executedFunction(args) {
 		var later = function () {
