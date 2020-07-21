@@ -58,9 +58,11 @@ class App extends React.Component {
 				}} />
 
 				{this.state.loading == null ? (<h4>Weather is loading </h4>) : <div>
-					<p className="bg-primary">
-						{JSON.stringify(this.state.weather)}
-					</p>
+					{
+						this.state.weather !== null ? (<p className="bg-primary">
+							{JSON.stringify(this.state.weather)}
+						</p>) : null
+					}
 				</div>}
 			</div>
 		);
