@@ -7,7 +7,6 @@ axios.defaults.headers.common['Access-Control-Allow-Headers'] = "";
 
 const instance = axios.create({
 	baseURL: window.location.origin,
-	timeout: 1000,
 	headers: {
 		'Content-Type': 'application/json',
 		'Accept': 'application/json, text/plain, */*',
