@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
@@ -7,7 +6,7 @@ function getWOEID(city) {
 	return axios.get("api/location/search?query=" + city);
 }
 
-function getWeather(WOEID){
+function getWeather(WOEID) {
 	return axios.get("api/location/" + WOEID + "/");
 }
 
@@ -19,28 +18,28 @@ class App extends React.Component {
 	}
 
 	render() {
-		var weather = this.state.weather;
-
 		return (
-			<div classWeatuer='container'>
+			<div className='container'>
 				<input type="text" placeholder="Enter the City" onChange={(e) => {
 					var city = e.target.value;
-					getWOEID(city).then(response => {
-						var data = response.data;
-						if (data.length > 0) {
-							var WOEID = data[0]["woeid"]
-							getWeather(WOEID).then(response => {
-								var weather = response.data;
-								console.log(weather);
-								this.setState({weather:weather});
-							})
-						}
-					})
+
+					if (city.length >= 4) {
+						getWOEID(city).then(response => {
+							var data = response.data;
+							if (data.length > 0) {
+								var WOEID = data[0]["woeid"]
+								getWeather(WOEID).then(response => {
+									var weather = response.data;
+									console.log(weather);
+									this.setState({ weather: weather });
+								})
+							}
+						})
+					}
 				}} />
 
-				{this.state.weather == null ? (<h4>Weather is loading </h4>) :<div>
-					<p classWeather="bg-primary">Weather.</p>
-					
+				{this.state.weather == null ? (<h4>Weather is loading </h4>) : <div>
+					<p className="bg-primary">Weather.</p>
 				</div>}
 			</div>
 		);
