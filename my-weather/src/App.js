@@ -16,14 +16,14 @@ const instance = axios.create({
 });
 
 function debounce(func, wait) {
-	var timeout;
+	var timeout = null;
 
 	return function executedFunction(args) {
 		var later = function () {
 			timeout = null;
 		};
 
-		var callNow = timeout !== null;
+		var callNow = timeout === null;
 
 		clearTimeout(timeout);
 
