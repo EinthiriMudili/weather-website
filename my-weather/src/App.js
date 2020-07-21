@@ -15,6 +15,25 @@ const instance = axios.create({
 	}
 });
 
+function debounce(func, wait) {
+	var timeout;
+
+	return function executedFunction(args) {
+		var later = function () {
+			timeout = null;
+		};
+
+		var callNow = timeout !== null;
+
+		clearTimeout(timeout);
+
+		timeout = setTimeout(later, wait);
+
+		if (callNow) func(args);
+	};
+};
+
+
 function getWOEID(city) {
 	return instance.get("/api/location/search?query=" + city);
 }
@@ -28,33 +47,35 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { weather: null, loading: false };
+
+		this.onInputChange = debounce((e) => {
+			var city = e.target.value;
+
+			if (city.length >= 4) {
+
+				this.setState({ loading: true });
+
+				getWOEID(city).then(response => {
+					var data = response.data;
+					if (data.length > 0) {
+						var WOEID = data[0]["woeid"]
+						getWeather(WOEID).then(response => {
+							var weather = response.data;
+							this.setState({
+								weather: weather,
+								loading: false
+							});
+						})
+					}
+				})
+			}
+		}, 1000);
 	}
 
 	render() {
 		return (
 			<div className='container'>
-				<input type="text" placeholder="Enter the City" onChange={(e) => {
-					var city = e.target.value;
-
-					if (city.length >= 4) {
-
-						this.setState({ loading: true });
-
-						getWOEID(city).then(response => {
-							var data = response.data;
-							if (data.length > 0) {
-								var WOEID = data[0]["woeid"]
-								getWeather(WOEID).then(response => {
-									var weather = response.data;
-									this.setState({
-										weather: weather,
-										loading: false
-									});
-								})
-							}
-						})
-					}
-				}} />
+				<input type="text" placeholder="Enter the City" onChange={this.onInputChange} />
 
 				{this.state.loading == null ? (<h4>Weather is loading </h4>) : <div>
 					{
